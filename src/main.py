@@ -42,6 +42,11 @@ if __name__ == "__main__":
                         required = False,
                         default = "auto",
                         help ='Device Map parameter for HF model')
+    parser.add_argument('--add-generation-prompt',  
+                        type = bool,
+                        required = False,
+                        default = False,
+                        help ='Whether to add the final assistant suffix when prompt formatting')
     parser.add_argument('--show-intermediate-steps',  
                         type = bool,
                         required = False,
@@ -56,6 +61,7 @@ if __name__ == "__main__":
             "temperature": args.temperature,
             "low_cpu_mem_usage": args.low_cpu_mem_usage,
             "device_map": args.device_map,
+            "add_generation_prompt": args.add_generation_prompt,
         },
     )
     route_llm = ChatHuggingFace(model_id=args.llm_name, model_kwargs={
@@ -63,6 +69,7 @@ if __name__ == "__main__":
             "temperature": args.temperature,
             "low_cpu_mem_usage": args.low_cpu_mem_usage,
             "device_map": args.device_map,
+            "add_generation_prompt": args.add_generation_prompt,
         },
     )
     
