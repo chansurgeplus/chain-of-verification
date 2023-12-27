@@ -10,3 +10,5 @@ numexpr
 langchainhub
 sentencepiece
 jinja2
+autoawq
+accelerate

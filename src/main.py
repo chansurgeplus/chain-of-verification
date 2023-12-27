@@ -2,9 +2,11 @@ import argparse
 from dotenv import load_dotenv
 from pprint import pprint
 
-from langchain.chat_models import ChatOpenAI
+from langchain_community.llms import HuggingFaceHub
+from langchain_community.chat_models.huggingface import ChatHuggingFace
 
 from route_chain import RouteCOVEChain
+from hf_langchain import ChatHuggingFace
 
 load_dotenv("/workspace/.env")
 
@@ -18,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument('--llm-name',  
                         type = str,
                         required = False,
-                        default = "gpt-3.5-turbo-0613",
+                        default = "mistralai/Mistral-7B-Instruct-v0.2",
                         help ='The openai llm name')
     parser.add_argument('--temperature',  
                         type = float,
@@ -28,7 +30,7 @@ if __name__ == "__main__":
     parser.add_argument('--max-tokens',  
                         type = int,
                         required = False,
-                        default = 500,
+                        default = 4096,
                         help ='The max_tokens of the llm')
     parser.add_argument('--show-intermediate-steps',  
                         type = bool,
@@ -38,13 +40,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     original_query = args.question
-    chain_llm = ChatOpenAI(model_name=args.llm_name,
-                     temperature=args.temperature,
-                     max_tokens=args.max_tokens)
-    
-    route_llm = ChatOpenAI(model_name="gpt-3.5-turbo-0613",
-                     temperature=0.1,
-                     max_tokens=500)
+
+    chain_llm = ChatHuggingFace(model_id=args.llm_name, model_kwargs={
+            "max_new_tokens": args.max_tokens,
+            "temperature": args.temperature,
+        },
+    )
+    route_llm = ChatHuggingFace(model_id=args.llm_name, model_kwargs={
+            "max_new_tokens": args.max_tokens,
+            "temperature": args.temperature,
+        },
+    )
     
     router_cove_chain_instance = RouteCOVEChain(original_query, route_llm, chain_llm, args.show_intermediate_steps)
     router_cove_chain = router_cove_chain_instance()
