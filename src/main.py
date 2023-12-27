@@ -32,6 +32,16 @@ if __name__ == "__main__":
                         required = False,
                         default = 4096,
                         help ='The max_tokens of the llm')
+    parser.add_argument('--low-cpu-mem-usage',  
+                        type = int,
+                        required = False,
+                        default = False,
+                        help ='Low CPU Memory Usage parameter for HF model')
+    parser.add_argument('--device-map',  
+                        type = str,
+                        required = False,
+                        default = "auto",
+                        help ='Device Map parameter for HF model')
     parser.add_argument('--show-intermediate-steps',  
                         type = bool,
                         required = False,
@@ -44,11 +54,15 @@ if __name__ == "__main__":
     chain_llm = ChatHuggingFace(model_id=args.llm_name, model_kwargs={
             "max_new_tokens": args.max_tokens,
             "temperature": args.temperature,
+            "low_cpu_mem_usage": args.low_cpu_mem_usage,
+            "device_map": args.device_map,
         },
     )
     route_llm = ChatHuggingFace(model_id=args.llm_name, model_kwargs={
             "max_new_tokens": args.max_tokens,
             "temperature": args.temperature,
+            "low_cpu_mem_usage": args.low_cpu_mem_usage,
+            "device_map": args.device_map,
         },
     )
     
