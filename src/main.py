@@ -33,7 +33,7 @@ if __name__ == "__main__":
                         default = 4096,
                         help ='The max_tokens of the llm')
     parser.add_argument('--low-cpu-mem-usage',  
-                        type = int,
+                        type = bool,
                         required = False,
                         default = False,
                         help ='Low CPU Memory Usage parameter for HF model')
