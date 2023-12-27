@@ -26,7 +26,6 @@ from langchain.chains.base import Chain
 from langchain.prompts.base import BasePromptTemplate
 from langchain.tools import DuckDuckGoSearchRun
 import langchain
-from langchain.chat_models import ChatOpenAI
 from langchain.tools import DuckDuckGoSearchRun
 from langchain.schema import (
     AIMessage,
