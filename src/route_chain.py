@@ -45,7 +45,7 @@ class RouteCOVEChain(object):
     def __call__(self):
         route_message = [HumanMessage(content=prompts.ROUTER_CHAIN_PROMPT.format(self.question))]
         response = self.llm(route_message)
-        response_str = response.content
+        response_str = response.content.replace("\\", "")
         try:
             chain_dict = json.loads(response_str)
             try:
