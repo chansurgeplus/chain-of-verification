@@ -4,7 +4,7 @@ tiktoken
 tenacity
 python-dotenv
 text-generation
-transformers
+transformers==4.36.2
 google-search-results
 numexpr
 langchainhub
