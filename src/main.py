@@ -21,7 +21,7 @@ if __name__ == "__main__":
                         type = str,
                         required = False,
                         default = "mistralai/Mistral-7B-Instruct-v0.2",
-                        help ='The openai llm name')
+                        help ='The huggingface model id')
     parser.add_argument('--temperature',  
                         type = float,
                         required = False,

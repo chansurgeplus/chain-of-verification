@@ -3,7 +3,6 @@
 import os
 import re
 import itertools
-import openai
 import tiktoken
 import json
 from dotenv import load_dotenv
